@@ -1,0 +1,14 @@
+{
+  "messages_processed": 100,
+  "rule_handled": 40,
+  "llm_handled": 60,
+  "total_runtime_seconds": 20.4815,
+  "rule_processing_seconds": 0.0002,
+  "llm_processing_seconds": 20.4417,
+  "llm_requests": 60,
+  "average_llm_latency_seconds": 0.3407,
+  "min_llm_latency_seconds": 0.2208,
+  "max_llm_latency_seconds": 2.6751,
+  "provider": "ollama",
+  "model": "gemma4:26b"
+}

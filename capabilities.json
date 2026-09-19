@@ -1,0 +1,108 @@
+{
+  "student": "Ujjwal Perla, cert-aai-2026-06-0035",
+  "repo": "https://github.com/ujjwaldevcode-hash/inboxHero",
+  "system": {
+    "framework": "none",
+    "model": "gemma4:26b via local Ollama; configurable through OLLAMA_MODEL",
+    "messages_processed": 100,
+    "rule_handled": 40,
+    "dispositions": ["reply", "archive", "defer", "delegate", "escalate"],
+    "retrieval": "thread-walk",
+    "irreversible": ["send", "delete"],
+    "reversible": ["draft", "label", "archive", "defer", "delegate"],
+    "gate": "both",
+    "preference_demo": "m041: Sam never takes meetings before 11:00am; applied to m043"
+  },
+  "capabilities": [
+    {
+      "id": "R1",
+      "name": "Zero the inbox",
+      "tier": "B",
+      "claim": "Assigns every message exactly one disposition and reason; deterministic rules handle obvious cases and the LLM handles the remaining contextual cases.",
+      "command": "python demo.py --cap R1",
+      "observable": "Prints decisions for all 100 messages, reports rule-handled and LLM-handled counts, and ends with undecided: 0; writes decisions.json and performance.json.",
+      "evidence": "trace.jsonl, decision events tagged cap=R1; performance.json"
+    },
+    {
+      "id": "R2",
+      "name": "Grounded reply",
+      "tier": "B",
+      "claim": "Drafts a reply grounded in earlier inbox messages and records the source message ids used.",
+      "command": "python demo.py --cap R2 --msg m008",
+      "observable": "Prints a grounded draft for m008 using m003 as the retrieved earlier source; source ids are recorded in the grounded-reply trace.",
+      "evidence": "trace.jsonl, read events followed by a grounded_reply event tagged cap=R2"
+    },
+    {
+      "id": "R3",
+      "name": "Gate irreversible actions",
+      "tier": "C",
+      "claim": "Never executes send or delete in dry-run mode and requires explicit approval for an irreversible proposal.",
+      "command": "python demo.py --cap R3 --dry-run",
+      "observable": "Shows SEND and DELETE proposals blocked by dry-run; no irreversible output is produced by the dry-run.",
+      "evidence": "trace.jsonl, irreversible_gate events tagged cap=R3"
+    },
+    {
+      "id": "R4",
+      "name": "Persistent preference",
+      "tier": "C",
+      "claim": "Records a stated scheduling preference and applies it after a process restart.",
+      "command": "python demo.py --cap R4",
+      "observable": "Stores m041's no-before-11:00 preference, creates a fresh PreferenceStore, then identifies m043's 09:00 request as a conflict and proposes 11:00 or later.",
+      "evidence": "prefs.json and trace.jsonl preference_applied event tagged cap=R4"
+    },
+    {
+      "id": "R5",
+      "name": "Refuse embedded instructions",
+      "tier": "C",
+      "claim": "Detects hostile instructions inside untrusted messages, refuses them, flags them, and reports the attempted action without executing it.",
+      "command": "python demo.py --cap R5",
+      "observable": "Reports seven detected threats as REFUSED and FLAGGED, including m017, m024, m021, m045, m039, m023 and m047.",
+      "evidence": "trace.jsonl, security_refusal events tagged cap=R5"
+    },
+    {
+      "id": "R6",
+      "name": "Dashboard",
+      "tier": "C",
+      "claim": "Generates exactly three panes for pending actions, flagged messages, and commitments, with cited commitments and surfaced scheduling conflicts.",
+      "command": "python demo.py --cap R6",
+      "observable": "Writes dashboard.html and dashboard.json; the output reports 70 pending actions, 7 flagged messages, 6 commitments and 1 scheduling conflict.",
+      "evidence": "dashboard.html, dashboard.json, and dashboard_generated event tagged cap=R6"
+    },
+    {
+      "id": "X1",
+      "name": "Follow-up tracker",
+      "tier": "B",
+      "claim": "Finds sent messages unanswered for at least three days and drafts a follow-up.",
+      "command": "python demo.py --cap X1",
+      "observable": "Prints qualifying follow-up candidates with message_id, days_waiting and draft; the current run identifies m044 and uses the explicit recipient name found in the source message when available.",
+      "evidence": "trace.jsonl, followup_candidate events tagged cap=X1"
+    },
+    {
+      "id": "X2",
+      "name": "Inbox digest",
+      "tier": "A",
+      "claim": "Produces a compact digest of what needs attention, what can wait, and what was automatically archived.",
+      "command": "python demo.py --cap X2",
+      "observable": "Reports Needs attention: 10, Can wait: 60 and Auto-archived: 30; writes digest.json.",
+      "evidence": "trace.jsonl, inbox_digest_generated event tagged cap=X2"
+    },
+    {
+      "id": "X3",
+      "name": "Preference-aware scheduling",
+      "tier": "C",
+      "claim": "Evaluates a meeting request against a persistent preference and existing commitments, proposing an alternative when needed.",
+      "command": "python demo.py --cap X3",
+      "observable": "Reports that m043 at 09:00 violates the 11:00 preference and surfaces the Sep 15 15:00 conflict between m010 and m061.",
+      "evidence": "trace.jsonl, schedule_evaluation event tagged cap=X3"
+    },
+    {
+      "id": "X4",
+      "name": "Thread summary",
+      "tier": "B",
+      "claim": "Uses the configured LLM to summarize a multi-message thread and identify its current open question with supporting source ids.",
+      "command": "python demo.py --cap X4 --thread t-launch",
+      "observable": "Prints an LLM-generated summary of t-launch, identifies the open pricing-approval question, and lists source ids from the supplied thread.",
+      "evidence": "trace.jsonl, thread_summary_generated event tagged cap=X4"
+    }
+  ]
+}
