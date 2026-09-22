@@ -1,0 +1,173 @@
+{
+  "updated_at": "2026-09-22T15:50:54.263156+00:00",
+  "records": [
+    {
+      "timestamp": "2026-09-21T17:43:49.655409+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T18:48:40.707955+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T18:52:53.306251+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T19:57:09.457338+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T20:21:12.526096+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T20:32:13.919071+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-21T22:04:56.689413+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T11:56:20.494108+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:16:02.656988+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:33:02.470759+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:37:28.526225+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:42:23.029073+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:46:53.180684+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    },
+    {
+      "timestamp": "2026-09-22T15:50:54.262997+00:00",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "decision": "SAFE_PREFERENCE",
+      "risk": "LOW",
+      "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+      "model": "gemma4:12b",
+      "raw_response": "{\n  \"decision\": \"SAFE_PREFERENCE\",\n  \"risk\": \"LOW\",\n  \"reason\": \"This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.\"\n}"
+    }
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "generated_by": "quadrant_summary.py",
+  "pipeline": {
+    "architecture": "security_first_v4_quadrants",
+    "messages_processed": 100,
+    "security_threats": 8,
+    "safe_messages": 92,
+    "generic_noise_filtered": 13,
+    "quadrant_messages": 92
+  },
+  "quadrant_classification": {
+    "total_classified": 92,
+    "source_counts": {
+      "quadrant_triage": 79,
+      "generic_noise_filter": 13
+    },
+    "dispositions": {
+      "archive": 71,
+      "defer": 5,
+      "escalate": 3,
+      "reply": 13
+    },
+    "quadrants": {
+      "Q1": {
+        "label": "Q1 (Urgent, Important)",
+        "title": "For Your Action or Response",
+        "description": "Messages requiring immediate owner attention, decision, action, or response.",
+        "recommended_handling": "For Your Action or Response",
+        "count": 14,
+        "percentage": 15.22,
+        "dispositions": {
+          "archive": 1,
+          "defer": 1,
+          "escalate": 3,
+          "reply": 9
+        },
+        "sources": {
+          "quadrant_triage": 14,
+          "generic_noise_filter": 0
+        },
+        "message_ids": [
+          "m001",
+          "m003",
+          "m088",
+          "m105",
+          "m090",
+          "m030",
+          "m042",
+          "m012",
+          "m018",
+          "m016",
+          "m046",
+          "m019",
+          "m043",
+          "m048"
+        ],
+        "reasons": [
+          {
+            "message_id": "m001",
+            "disposition": "escalate",
+            "reason": "The staging environment is experiencing a service outage (500 errors), which is a significant operational risk requiring immediate technical intervention.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m003",
+            "disposition": "reply",
+            "reason": "The staging environment is down, requiring immediate action to update credentials and restart the worker to restore service.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m088",
+            "disposition": "escalate",
+            "reason": "This is a security alert regarding a password change for a critical account (AWS root). If unauthorized, it represents a significant security risk that requires immediate personal intervention.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m105",
+            "disposition": "archive",
+            "reason": "This is a security notification regarding a new login. While important for security awareness, it requires no action if the login was intentional, and as an automated notification, it is best archived unless the user identifies it as unauthorized.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m090",
+            "disposition": "escalate",
+            "reason": "A production error in the checkout process is a critical operational risk that requires immediate technical intervention.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m030",
+            "disposition": "reply",
+            "reason": "The email requires Sam's specific approval on pricing copy by a deadline (the 12th) to unblock the rest of the launch week shipping process.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m042",
+            "disposition": "reply",
+            "reason": "The candidate has a competing offer deadline on the 19th, requiring a timely response to maintain the recruitment process.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m012",
+            "disposition": "reply",
+            "reason": "The sender is requesting completion of a previously discussed task before an upcoming call, implying immediate time sensitivity and relevance to work priorities.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m018",
+            "disposition": "reply",
+            "reason": "The email requires a review and signature of a legal document (SAFE) by a specific deadline (Friday), making it both important and time-sensitive.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m016",
+            "disposition": "reply",
+            "reason": "The sender is proposing a specific time for a product demo this Wednesday and expresses a desire to move quickly, requiring a timely confirmation.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m046",
+            "disposition": "reply",
+            "reason": "The sender has a deadline this Thursday and requires specific information (product differentiator and launch date confirmation) for upcoming media coverage.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m019",
+            "disposition": "reply",
+            "reason": "The booking hold expires in 48 hours, requiring a timely confirmation to secure the venue for the product launch.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m043",
+            "disposition": "reply",
+            "reason": "The sender is requesting a meeting for a specific upcoming time slot (Monday at 9:00am) involving a partner, requiring a timely response to confirm availability.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m048",
+            "disposition": "defer",
+            "reason": "The email requires a review and corrections by a specific deadline (Monday) for an upcoming board meeting, making it both important and time-sensitive.",
+            "source": "quadrant_triage"
+          }
+        ]
+      },
+      "Q2": {
+        "label": "Q2 (Important, Not Urgent)",
+        "title": "Schedule / Follow Up",
+        "description": "Important messages that require attention but can be scheduled, deferred, or followed up later.",
+        "recommended_handling": "Schedule / Follow Up",
+        "count": 17,
+        "percentage": 18.48,
+        "dispositions": {
+          "archive": 12,
+          "defer": 4,
+          "reply": 1
+        },
+        "sources": {
+          "quadrant_triage": 17,
+          "generic_noise_filter": 0
+        },
+        "message_ids": [
+          "m005",
+          "m044",
+          "m041",
+          "m015",
+          "m026",
+          "m027",
+          "m028",
+          "m029",
+          "m033",
+          "m034",
+          "m038",
+          "m010",
+          "m040",
+          "m057",
+          "m035",
+          "m036",
+          "m055"
+        ],
+        "reasons": [
+          {
+            "message_id": "m005",
+            "disposition": "archive",
+            "reason": "The email is a status update confirming that a previous issue (staging being down) has been resolved and the system is recovering.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m044",
+            "disposition": "defer",
+            "reason": "The invoice is important for contractor payment, but the sender explicitly stated 'no rush' and 'ideally this week,' indicating it does not require immediate action today.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m041",
+            "disposition": "archive",
+            "reason": "This is a standing preference for future scheduling. While important for context, it requires no immediate action or response, and the information can be stored/archived for future reference.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m015",
+            "disposition": "archive",
+            "reason": "This is a standing preference/instruction for future workflow rather than an immediate task or actionable legal matter requiring a response.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m026",
+            "disposition": "archive",
+            "reason": "The email is an informational kickoff for a future project (target date is the 20th) and requires no immediate action or response from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m027",
+            "disposition": "archive",
+            "reason": "The email is a status update regarding design assets for an upcoming launch; it is important context but requires no immediate action or response.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m028",
+            "disposition": "archive",
+            "reason": "The email is a status update informing the owner that Maya is taking ownership of specific tasks with a deadline later in the week; no immediate action is required from Sam.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m029",
+            "disposition": "archive",
+            "reason": "The email is a status update regarding a scheduled load test; it is important for project awareness but requires no immediate action or response.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m033",
+            "disposition": "defer",
+            "reason": "The email contains a draft for review regarding an upcoming launch. While important for the project, there is no immediate deadline or crisis requiring instant action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m034",
+            "disposition": "archive",
+            "reason": "The email is a status update regarding the approval and uploading of assets; it is important for the project but requires no immediate action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m038",
+            "disposition": "archive",
+            "reason": "The email is a confirmation of a scheduled meeting on the 18th. It is important for the owner's schedule, but since it is a confirmation of a set date and requires no immediate action or response, it can be archived for information.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m010",
+            "disposition": "reply",
+            "reason": "The email is an important networking/investor request, but the proposed meeting is over a week away, so it does not require immediate action today.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m040",
+            "disposition": "defer",
+            "reason": "The board deck is an important task, but the deadline is a future requirement (two days before the review), allowing for planned work rather than immediate intervention.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m057",
+            "disposition": "archive",
+            "reason": "The email is an informational update regarding a financial dispute case, but it explicitly states that no further action is needed from the owner at this time.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m035",
+            "disposition": "archive",
+            "reason": "The email is a status update confirming a successful deployment; it is important information but requires no immediate action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m036",
+            "disposition": "archive",
+            "reason": "The email is a status update/reminder regarding a future deadline (the 20th) and requires no immediate action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m055",
+            "disposition": "defer",
+            "reason": "The email concerns an important legal document (IP assignment) but explicitly states it is 'not urgent' and only needs to be completed before month-end.",
+            "source": "quadrant_triage"
+          }
+        ]
+      },
+      "Q3": {
+        "label": "Q3 (Urgent, Not Important)",
+        "title": "Delegate",
+        "description": "Time-sensitive messages that do not require the owner's direct involvement and can be delegated.",
+        "recommended_handling": "Delegate",
+        "count": 4,
+        "percentage": 4.35,
+        "dispositions": {
+          "archive": 2,
+          "reply": 2
+        },
+        "sources": {
+          "quadrant_triage": 4,
+          "generic_noise_filter": 0
+        },
+        "message_ids": [
+          "m096",
+          "m080",
+          "m117",
+          "m013"
+        ],
+        "reasons": [
+          {
+            "message_id": "m096",
+            "disposition": "archive",
+            "reason": "This is an automated storage notification. While it requires attention to prevent service interruption, it is a routine system alert that requires no immediate manual action from the owner other than a potential subscription change.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m080",
+            "disposition": "archive",
+            "reason": "This is a routine automated calendar notification for a meeting starting very soon. While time-sensitive, it requires no action from the owner within the email interface itself.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m117",
+            "disposition": "reply",
+            "reason": "The timesheet submission has a specific deadline (Friday 5pm), making it urgent, but it is a routine administrative task of low importance to the owner's core priorities.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m013",
+            "disposition": "reply",
+            "reason": "The sender is requesting a schedule change for a meeting occurring this week, requiring a quick response to confirm availability.",
+            "source": "quadrant_triage"
+          }
+        ]
+      },
+      "Q4": {
+        "label": "Q4 (Not Urgent, Not Important)",
+        "title": "Archive",
+        "description": "Low-priority or informational messages that do not require action.",
+        "recommended_handling": "Archive",
+        "count": 57,
+        "percentage": 61.96,
+        "dispositions": {
+          "archive": 56,
+          "reply": 1
+        },
+        "sources": {
+          "quadrant_triage": 44,
+          "generic_noise_filter": 13
+        },
+        "message_ids": [
+          "m072",
+          "m112",
+          "m064",
+          "m104",
+          "m113",
+          "m065",
+          "m081",
+          "m098",
+          "m074",
+          "m114",
+          "m066",
+          "m106",
+          "m082",
+          "m099",
+          "m075",
+          "m115",
+          "m067",
+          "m107",
+          "m092",
+          "m051",
+          "m109",
+          "m085",
+          "m101",
+          "m077",
+          "m069",
+          "m093",
+          "m049",
+          "m061",
+          "m086",
+          "m062",
+          "m078",
+          "m118",
+          "m070",
+          "m094",
+          "m059",
+          "m053",
+          "m087",
+          "m063",
+          "m111",
+          "m103",
+          "m079",
+          "m119",
+          "m095",
+          "m071",
+          "m097",
+          "m073",
+          "m089",
+          "m091",
+          "m083",
+          "m108",
+          "m084",
+          "m100",
+          "m076",
+          "m116",
+          "m068",
+          "m110",
+          "m102"
+        ],
+        "reasons": [
+          {
+            "message_id": "m072",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding unread messages, which requires no immediate action or importance for the owner's core priorities.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m112",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding usage limits that explicitly states no action is needed.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m064",
+            "disposition": "archive",
+            "reason": "This is a routine automated shipping notification that requires no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m104",
+            "disposition": "archive",
+            "reason": "This is a routine automated receipt for a subscription charge, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m113",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification/marketing email regarding course progress, requiring no action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m065",
+            "disposition": "archive",
+            "reason": "This is a routine automated security notification from GitHub. Since the email states no action is needed if the sign-in was intentional, it requires no follow-up.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m081",
+            "disposition": "archive",
+            "reason": "This is a routine order confirmation receipt for a personal purchase, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m098",
+            "disposition": "archive",
+            "reason": "This is an automated notification informing the owner that a previously active incident has already been resolved.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m074",
+            "disposition": "archive",
+            "reason": "This is a routine newsletter containing low-priority, informational content with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m114",
+            "disposition": "archive",
+            "reason": "This is a routine, automated security notification stating that no issues were found, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m066",
+            "disposition": "archive",
+            "reason": "This is an automated security verification code. It is a routine, single-use notification that requires no action from the owner unless they are currently attempting to sign in.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m106",
+            "disposition": "archive",
+            "reason": "This is a routine monthly summary report providing informational statistics with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m082",
+            "disposition": "archive",
+            "reason": "The email is an automated notification stating that a monitor has recovered and explicitly mentions that no action is needed.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m099",
+            "disposition": "archive",
+            "reason": "This is a routine automated receipt for a subscription purchase, requiring no action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m075",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding a future domain renewal that explicitly states no action is needed.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m115",
+            "disposition": "archive",
+            "reason": "This is a routine automated receipt for a completed transaction, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m067",
+            "disposition": "archive",
+            "reason": "This is an automated notification regarding comments in Notion. It is routine, low-priority information that requires no immediate action from the owner within the email itself.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m107",
+            "disposition": "archive",
+            "reason": "This is a routine, automated weekly analytics report providing informational data with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m092",
+            "disposition": "archive",
+            "reason": "This is a routine social media notification with no required action or significant importance.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m051",
+            "disposition": "archive",
+            "reason": "This is a casual, social invitation for coffee with no immediate deadline or business priority.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m109",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification from Substack regarding new content, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m085",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding a scheduled payout. It is informational and requires no immediate action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m101",
+            "disposition": "archive",
+            "reason": "This is a routine, automated feedback request with no required action or impact on core priorities.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m077",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding a bank statement that requires no immediate action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m069",
+            "disposition": "archive",
+            "reason": "This is a routine automated receipt for a successful payment, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m093",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification confirming a delivery; it requires no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m049",
+            "disposition": "archive",
+            "reason": "This is a routine automated status report providing informational data with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m061",
+            "disposition": "reply",
+            "reason": "This is a routine appointment reminder. While not high priority, the owner needs to confirm or reschedule the appointment.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m086",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding a scheduled meeting in the future; it requires no immediate action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m062",
+            "disposition": "archive",
+            "reason": "This is an automated receipt for a routine transaction, requiring no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m078",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification summarizing weekly activity with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m118",
+            "disposition": "archive",
+            "reason": "This is a routine informational notification regarding office status that requires no action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m070",
+            "disposition": "archive",
+            "reason": "This is a routine, automated notification from LinkedIn providing low-value social media engagement data that requires no action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m094",
+            "disposition": "archive",
+            "reason": "This is a routine, automated marketing email providing course recommendations with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m059",
+            "disposition": "archive",
+            "reason": "This is a routine informational update regarding a team member's upcoming time off. No action is required from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m053",
+            "disposition": "archive",
+            "reason": "This is a routine subscription renewal notification that explicitly states no action is needed.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m087",
+            "disposition": "archive",
+            "reason": "This is a routine automated newsletter digest containing low-priority informational links.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m063",
+            "disposition": "archive",
+            "reason": "This is a routine automated receipt for a past transaction that requires no action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m111",
+            "disposition": "archive",
+            "reason": "This is a routine automated daily digest notification from a task management service providing status updates.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m103",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding usage statistics. The email explicitly states 'No action needed'.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m079",
+            "disposition": "archive",
+            "reason": "This is a routine, automated productivity report providing informational feedback with no required action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m119",
+            "disposition": "archive",
+            "reason": "This is an automated notification providing access to previously recorded notes; it requires no immediate action or decision.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m095",
+            "disposition": "archive",
+            "reason": "This is a routine automated notification regarding a flight check-in for a future date (Sep 22), requiring no immediate action from the owner.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m071",
+            "disposition": "archive",
+            "reason": "This is a routine automated billing notification providing information with no required immediate action.",
+            "source": "quadrant_triage"
+          },
+          {
+            "message_id": "m097",
+            "disposition": "archive",
+            "reason": "Routine automated report with no concrete owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m073",
+            "disposition": "archive",
+            "reason": "Routine receipt, invoice, order confirmation, or statement with no owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m089",
+            "disposition": "archive",
+            "reason": "Routine receipt, invoice, order confirmation, or statement with no owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m091",
+            "disposition": "archive",
+            "reason": "Routine receipt, invoice, order confirmation, or statement with no owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m083",
+            "disposition": "archive",
+            "reason": "Newsletter/digest content with no concrete owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m108",
+            "disposition": "archive",
+            "reason": "Routine informational/transactional email explicitly states that no action is required.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m084",
+            "disposition": "archive",
+            "reason": "Routine informational/transactional email explicitly states that no action is required.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m100",
+            "disposition": "archive",
+            "reason": "Routine automated notification with no concrete owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m076",
+            "disposition": "archive",
+            "reason": "Routine automated notification with no concrete owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m116",
+            "disposition": "archive",
+            "reason": "Routine informational/transactional email explicitly states that no action is required.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m068",
+            "disposition": "archive",
+            "reason": "Routine automated report with no concrete owner action.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m110",
+            "disposition": "archive",
+            "reason": "Routine informational/transactional email explicitly states that no action is required.",
+            "source": "generic_noise_filter"
+          },
+          {
+            "message_id": "m102",
+            "disposition": "archive",
+            "reason": "Routine receipt, invoice, order confirmation, or statement with no owner action.",
+            "source": "generic_noise_filter"
+          }
+        ]
+      }
+    }
+  }
+}

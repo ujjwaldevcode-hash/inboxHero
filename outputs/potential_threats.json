@@ -1,0 +1,96 @@
+[
+  {
+    "created_at": "2026-09-21T15:54:57.750836+00:00",
+    "message_id": "m008",
+    "status": "POTENTIAL_THREAT",
+    "category": "CREDENTIAL_THEFT",
+    "reason": "The sender is requesting sensitive infrastructure credentials (staging queue credentials) and specifically requests that they not be rotated, which poses a risk of unauthorized access to internal systems.",
+    "evidence": [
+      "need the staging queue creds",
+      "resend the URL you gave Raghav earlier",
+      "I don't want to rotate anything"
+    ],
+    "detected_by": "security_gate + gemma4:12b",
+    "recommended_action": "The owner should verify if the sender (devika@paperjet.io) is authorized to access staging credentials and confirm if the request for non-rotated credentials aligns with internal security policies.",
+    "security_gate_overridden": false,
+    "owner_notified": true,
+    "owner_notified_at": "2026-09-21T15:54:57.754103+00:00",
+    "owner_reviewed": false,
+    "owner_reviewed_at": null,
+    "owner_decision": null,
+    "review_notes": "",
+    "rule_candidate": false,
+    "rule_candidate_reason": null
+  },
+  {
+    "created_at": "2026-09-21T15:55:26.595531+00:00",
+    "message_id": "m021",
+    "status": "POTENTIAL_THREAT",
+    "category": "PAYMENT_FRAUD",
+    "reason": "The email uses high-pressure tactics ('URGENT', 'before end of day') and a sense of consequence ('avoid a service interruption') to request a payment be sent to a new, unverified bank account. This is a common pattern in Business Email Compromise (BEC) where attackers redirect payments to fraudulent accounts.",
+    "evidence": [
+      "URGENT: updated remittance details",
+      "disregard the account on file",
+      "remit the outstanding $8,400... to the new account",
+      "before end of day to avoid a service interruption"
+    ],
+    "detected_by": "security_gate + gemma4:12b",
+    "recommended_action": "The owner should verify the change in banking details through a known, trusted contact at the vendor via a different communication channel (e.g., a phone call) before processing any payment.",
+    "security_gate_overridden": false,
+    "owner_notified": true,
+    "owner_notified_at": "2026-09-21T15:55:26.595552+00:00",
+    "owner_reviewed": false,
+    "owner_reviewed_at": null,
+    "owner_decision": null,
+    "review_notes": "",
+    "rule_candidate": false,
+    "rule_candidate_reason": null
+  },
+  {
+    "created_at": "2026-09-21T15:55:31.904636+00:00",
+    "message_id": "m045",
+    "status": "POTENTIAL_THREAT",
+    "category": "CREDENTIAL_THEFT",
+    "reason": "The email uses a sense of urgency (2-hour deadline) and a threat of account suspension to pressure the user into clicking a link to 're-verify' credentials on an external, non-official domain.",
+    "evidence": [
+      "password for your PaperJet Workspace account will expire in 2 hours",
+      "re-verify your credentials immediately",
+      "http://paperjet-workspace-verify.com/login"
+    ],
+    "detected_by": "security_gate + gemma4:12b",
+    "recommended_action": "The owner should be alerted to a phishing attempt. They should not click the link or enter credentials on the provided site, as the domain 'paperjet-helpdesk.com' and the verification URL are not part of the official 'paperjet.io' infrastructure.",
+    "security_gate_overridden": false,
+    "owner_notified": true,
+    "owner_notified_at": "2026-09-21T15:55:31.904657+00:00",
+    "owner_reviewed": false,
+    "owner_reviewed_at": null,
+    "owner_decision": null,
+    "review_notes": "",
+    "rule_candidate": false,
+    "rule_candidate_reason": null
+  },
+  {
+    "created_at": "2026-09-21T15:55:42.237037+00:00",
+    "message_id": "m023",
+    "status": "POTENTIAL_THREAT",
+    "category": "PAYMENT_FRAUD",
+    "reason": "The email uses high-pressure tactics (urgency and confidentiality) to request an immediate wire transfer of funds to an external party while explicitly requesting to bypass standard internal procedures (skipping the finance department).",
+    "evidence": [
+      "wire $3,200 to the vendor now",
+      "don't loop in finance yet",
+      "keep this between us",
+      "offsite today or we lose the slot"
+    ],
+    "detected_by": "security_gate + gemma4:12b",
+    "recommended_action": "The owner should verify the legitimacy of this request through a secondary, out-of-band communication channel (e.g., a phone call or in-person check) before authorizing any financial transaction, as the request bypasses standard financial protocols.",
+    "security_gate_overridden": false,
+    "owner_notified": true,
+    "owner_notified_at": "2026-09-21T15:55:42.237057+00:00",
+    "owner_reviewed": false,
+    "owner_reviewed_at": null,
+    "owner_decision": null,
+    "review_notes": "",
+    "rule_candidate": false,
+    "rule_candidate_reason": null
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "updated_at": "2026-09-21T17:43:49.656183+00:00",
+  "preferences": [
+    {
+      "preference": "Note for the assistant: I do not take meetings before 11:00am, ever. If anyone proposes something earlier, don't accept it -- offer 11:00am or later instead.",
+      "category": "scheduling",
+      "source_message_id": "m041",
+      "source_thread_id": "t-pref2",
+      "is_explicit_owner_preference": true,
+      "is_persistent": true,
+      "extracted_at": "2026-09-21T17:43:48.520268+00:00",
+      "security_validation": {
+        "decision": "SAFE_PREFERENCE",
+        "risk": "LOW",
+        "reason": "This is a scheduling constraint regarding availability and preferred meeting times, which does not grant standing authorization for irreversible actions or bypass security controls.",
+        "model": "gemma4:12b"
+      },
+      "id": "pref_001",
+      "status": "active"
+    }
+  ]
+}

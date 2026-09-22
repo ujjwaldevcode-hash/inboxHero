@@ -28,14 +28,16 @@ python demo.py --cap X4 --thread t-launch
 
 ## System summary
 
-inboxHero is a local Python agentic-system prototype with **no external agent framework**. It uses deterministic rules for obvious inbox cases and a locally hosted **Gemma 4 26B model through Ollama** for contextual triage, grounded drafting and thread summarisation. Retrieval uses the supplied inbox's `thread_id` structure, persistent scheduling preferences are stored in `prefs.json`, and irreversible actions are isolated behind a dry-run/approval gate. Email content is treated as untrusted data throughout the architecture rather than as executable instructions.
+inboxHero is a local Python agentic-system prototype with **no external agent framework**. It uses deterministic rules for obvious inbox cases and a **three-model local Ollama stack** for contextual and security work: **Gemma 4 26B** for general InboxHero reasoning, grounded drafting and thread summarisation; **Granite Guardian 4.1 8B** for the dedicated security gate; and **Gemma 4 12B** for specialized threat labeling and persistent-preference security validation. Retrieval uses the supplied inbox's `thread_id` structure, persistent scheduling preferences are stored in `prefs.json`, and irreversible actions are isolated behind a dry-run/approval gate. Email content is treated as untrusted data throughout the architecture rather than as executable instructions.
 
 ## System facts
 
 | Field | Choice |
 |---|---|
 | Framework | `none` |
-| Model | `gemma4:26b` via local Ollama for the recorded development run |
+| General model | `gemma4:26b` via local Ollama |
+| Security gate | `granite4.1-guardian:8b` via local Ollama |
+| Security labeling / preference validation | `gemma4:12b` via local Ollama |
 | Messages processed | 100 |
 | Rule handled | 40 |
 | LLM handled | 60 |
@@ -145,7 +147,13 @@ The framework choice is **none**. The assignment allows a framework or no framew
 
 ### Model choice
 
-The recorded development run uses **Gemma 4 26B through Ollama** locally. This avoids dependence on a remote API during development and gives predictable local execution. The provider/model are configured through environment variables loaded by `config.py`, so the model is not hard-coded into the application logic.
+The final system uses model specialization rather than asking one model to perform every task.
+
+- **Gemma 4 26B (`gemma4:26b`)** is the general-purpose InboxHero model. It handles contextual R1 classification, grounded drafting and thread summarisation. During development, it was compared with Qwen 3.8, GPT-OSS 20B and Gemma 4 12B; the observed 100-message R1 benchmark for Gemma 4 26B was 20.34 seconds with 0 undecided messages, so it was selected for the general contextual workload.
+- **Granite Guardian 4.1 8B (`granite4.1-guardian:8b`)** is the dedicated security gate. It evaluates untrusted email content before normal processing and produces a binary threat decision. Keeping this role separate prevents the general agent from being the sole security boundary.
+- **Gemma 4 12B (`gemma4:12b`)** handles narrower security tasks: threat labeling/explanation after the security gate has detected a threat, and validation of candidate persistent preferences before they are stored. A smaller model is sufficient for these constrained classification tasks and avoids using the larger general model for every security check.
+
+All models run locally through Ollama. Provider/model settings are configured through the project configuration where applicable, while the security components explicitly select their specialized models. The separation is intentional: the security gate, security labeling, preference validation and general inbox reasoning have distinct responsibilities.
 
 ### Retrieval choice
 
@@ -176,3 +184,115 @@ The owner remains accountable for an outgoing message that is explicitly approve
 ### 4. Name your own machinery.
 
 `agent.py` plays the reasoning/triage role, the capability functions in `demo.py` act like tasks, and `demo.py` is the command router. `retrieval.py` provides retrieval, `preferences.py` provides persistent memory, and `gate.py` provides the human-in-the-loop safety boundary. A framework could have provided standardized agent/task routing and state orchestration, but explicit Python components are easier to inspect and test for this small local fixture.
+
+## Security-first pipeline
+
+The final prototype can be run independently of the original R1-R6 capability commands using the security-first pipeline. The security pipeline adds an explicit boundary before normal inbox reasoning:
+
+```text
+INBOX
+  |
+  v
+Rule Gate + Granite Guardian
+  |
+  +---- THREAT ----> QUARANTINE / FLAGGED
+  |
+  +---- SAFE ------> Irreversible Guard
+                         |
+                         v
+                 Preference Security
+                         |
+                         v
+                 Generic Noise Filter
+                         |
+                         v
+                  Q1-Q4 Triage
+                         |
+                         v
+                 Existing Agent
+```
+
+Email content is treated as **untrusted data** throughout this flow. The deterministic rule gate catches known high-risk patterns, while Granite Guardian provides an independent LLM security decision. Threats are quarantined and do not proceed to preference persistence, normal triage or the general InboxHero agent. Candidate owner preferences are separately validated before persistence. Irreversible-action instructions are refused and require human review rather than becoming autonomous actions.
+
+### Security-first commands
+
+Run the complete security-first pipeline:
+
+```bash
+python3 pipeline.py
+```
+
+This reads the supplied `inbox.json`, runs the rule + Granite security gate, quarantines threats, applies the irreversible-action boundary, validates persistent preferences, filters deterministic generic noise, runs Q1-Q4 triage on the remaining safe messages, and writes:
+
+```text
+outputs/pipeline_results.json
+outputs/pipeline_audit.json
+```
+
+Generate the presentation dashboard from the completed pipeline artifacts:
+
+```bash
+python3 dashboard.py
+```
+
+The generated `dashboard.html` contains exactly the three R6 Inbox Overview panes:
+
+1. **Commitments**
+2. **Flagged / Security**
+3. **Pending Actions**
+
+It also contains a separate **Triage Q1-Q4** tab. The triage tab is a visualization/analysis view and is not counted as an additional R6 pane.
+
+To run the deterministic security tests without requiring an LLM:
+
+```bash
+pytest -q tests/test_irreversible_actions.py tests/test_security_rule_gate.py
+```
+
+The full security-first pipeline requires Ollama with the configured local models available.
+
+### Security-first observed run
+
+The latest recorded security-first run processed **100 messages**:
+
+- **8** threats quarantined
+- **92** messages passed the security gate
+- **13** generic-noise messages filtered deterministically
+- **79** normal messages reached quadrant LLM triage
+- Q1: **14**
+- Q2: **17**
+- Q3: **4**
+- Q4: **57**
+- **0** irreversible-action refusals in this fixture
+- Security invariant: **PASS**
+
+The invariant checks that no threat reached preference extraction or the normal agent, and that no irreversible instruction reached either path.
+
+### Q1-Q4 triage interpretation
+
+The quadrant classifier separates **priority** from **disposition**. Q1-Q4 describe urgency and importance; the final disposition still determines the handling action. The mapping shown in the dashboard is: Q1 **For Your Action or Response**, Q2 **Schedule / Follow Up**, Q3 **Delegate**, and Q4 **Archive**. This is a presentation/priority framework, not a rule that forces every message in a quadrant to have the same disposition.
+
+The triage tab displays the four quadrants in a 2x2 layout, with expandable messages and the original disposition visible for each message. Generic noise is included in Q4/Archive, while security threats remain outside triage in the Flagged / Security pane.
+
+## Security-first integration
+
+### Security model stack
+
+| Stage | Model | Responsibility |
+|---|---|---|
+| Rule gate | Deterministic Python rules | Catches known prompt-injection, phishing and payment-fraud patterns without an LLM. |
+| Security gate | **Granite Guardian 4.1 8B** (`granite4.1-guardian:8b`) | Independent binary threat screening of untrusted email content. |
+| Threat labeling | **Gemma 4 12B** (`gemma4:12b`) | Adds threat category/reason explanation after a security threat has been detected. |
+| Preference security | **Gemma 4 12B** (`gemma4:12b`) | Validates candidate owner preferences before persistence. |
+| General agent | **Gemma 4 26B** (`gemma4:26b`) | Contextual inbox triage, grounded drafting and thread summarisation for messages that pass the security boundary. |
+
+The model selection follows a **specialized-role principle**: the larger general model is reserved for
+context-heavy inbox tasks, while dedicated/smaller models handle security decisions and constrained
+classification tasks. Threats are quarantined before normal agent processing.
+
+- Rule + Granite security gate
+- Threat quarantine and owner review
+- Irreversible-action refusal boundary
+- Secure persistent preferences
+- Generic-noise filtering
+- Q1-Q4 triage dashboard

@@ -20,7 +20,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-The current development configuration uses **Ollama** locally with **Gemma 4 26B**. Ollama must be running on the machine before LLM-backed capabilities are used.
+The current development configuration uses **Ollama** locally. The main InboxHero agent uses **Gemma 4 26B**, while the security-first pipeline additionally uses **Granite Guardian 4.1 8B** and **Gemma 4 12B** for specialized security tasks. Ollama must be running on the machine before LLM-backed capabilities are used.
 
 Example `.env`:
 
@@ -62,31 +62,54 @@ INBOXHERO_OFFLINE=1 pytest -q
                          inbox.json
                              |
                              v
-                         inbox loader
+                       Inbox Loader
                              |
-              +--------------+--------------+
-              |                             |
-       security / rules              contextual cases
-              |                             |
-              v                             v
-     deterministic decision          local Ollama LLM
-              |                             |
-              +--------------+--------------+
+                             v
+                 +-------------------------+
+                 |     SECURITY GATE       |
+                 |                         |
+                 |  Deterministic Rules    |
+                 |          +              |
+                 |  Granite Guardian 4.1 8B|
+                 +-----------+-------------+
                              |
-                       structured result
-                             |
-              +--------------+--------------+
-              |                             |
-        retrieval / memory             action proposal
-              |                             |
-              v                             v
-       grounded draft/summary          safety gate
-                                            |
-                              +-------------+-------------+
-                              |                           |
-                         approved send/delete        blocked/flagged
-                              |                           |
-                         outbox/ + trace.jsonl       trace.jsonl
+                    +--------+--------+
+                    |                 |
+                 THREAT              SAFE
+                    |                 |
+                    v                 v
+              QUARANTINE        Irreversible Guard
+               / FLAGGED              |
+                                      v
+                              Preference Security
+                              + Persistence
+                                      |
+                                      v
+                              Generic Noise Filter
+                                      |
+                                      v
+                              Q1-Q4 Quadrant Triage
+                                      |
+                                      v
+                              Existing InboxHero
+                              Agent / Disposition
+                                      |
+                         +------------+------------+
+                         |                         |
+                   Retrieval / Memory        Action Proposal
+                         |                         |
+                         v                         v
+                  Grounded Draft /           Safety Gate
+                     Summary                     |
+                                                  |
+                                      +-----------+-----------+
+                                      |                       |
+                                  Approved                Blocked /
+                               Send / Delete              Flagged
+                                      |                       |
+                                  outbox/              trace.jsonl
+                               trace.jsonl
+
 ```
 
 There is intentionally **no external agent framework**. The assignment permits `framework: none`, so the project implements explicit Python components that are easy to inspect and test.
@@ -130,7 +153,17 @@ These values describe the latest Gemma 4 26B benchmark supplied for this project
 
 ### Model selection
 
-Four local Ollama models were compared during development: Qwen 3.8 (84.72 s), GPT-OSS 20B (134.57 s), Gemma 4 12B (43.88 s), and Gemma 4 26B (20.34 s) for the 100-message R1 run. Gemma 4 26B was selected as the final baseline because it produced the fastest observed run while maintaining conservative triage behavior, including 20 escalations and 0 undecided messages. The benchmark is machine-dependent and is presented as observed development evidence rather than a universal performance guarantee.
+The final prototype uses **three local Ollama models with different responsibilities**, rather than using one model for every stage:
+
+| Model | Role | Why it is used |
+|---|---|---|
+| **Gemma 4 26B** (`gemma4:26b`) | General/contextual InboxHero agent | Used for R1 contextual classification, grounded drafting and thread summarisation. It was selected as the main development model after comparing local models because the observed 100-message R1 run was fast and produced `undecided: 0`. |
+| **Granite Guardian 4.1 8B** (`granite4.1-guardian:8b`) | Security gate | Dedicated to the first security decision. It receives untrusted email content and returns a binary threat decision. It does **not** execute actions, persist preferences or replace the downstream agent. |
+| **Gemma 4 12B** (`gemma4:12b`) | Specialized security labeling and preference-security checks | Used for threat classification/explanation after a message has already been detected by the security gate, and for validating candidate persistent preferences before they are stored. It is smaller than the 26B model and is sufficient for these narrower classification tasks. |
+
+During development, the general R1 workload was benchmarked with Qwen 3.8 (84.72 s), GPT-OSS 20B (134.57 s), Gemma 4 12B (43.88 s), and Gemma 4 26B (20.34 s) for 100 messages. Gemma 4 26B was selected for the general-purpose InboxHero workload based on the observed development run. The security models were selected separately according to their specialized roles: Granite Guardian provides the dedicated safety-gate function, while Gemma 4 12B handles narrower threat-labeling and preference-security tasks.
+
+These timings are machine-dependent and are presented as observed development evidence rather than universal performance guarantees. The model responsibilities are deliberately separated so that a security classifier is not also the component that performs normal inbox reasoning or executes actions.
 
 ### Disposition vocabulary
 
@@ -176,7 +209,24 @@ R6 produces exactly three panes required by the assignment:
 2. **Flagged** — hostile, phishing, ungrounded or otherwise refused messages, including what was attempted and what the system did instead.
 3. **Commitments** — dates, deadlines and obligations extracted from the inbox, including source message IDs and surfaced scheduling conflicts.
 
-The HTML dashboard is generated from the run data rather than hand-assembled. The current dashboard evidence reports **70 pending actions, 7 flagged messages, 6 commitments and 1 scheduling conflict**.
+The HTML dashboard is generated from the run data rather than hand-assembled. The original R6 dashboard evidence reports **70 pending actions, 7 flagged messages, 6 commitments and 1 scheduling conflict**. The final security-first dashboard uses the security-gated pipeline, so quarantined threats are kept out of Pending Actions and shown in the Flagged / Security pane.
+
+### Q1-Q4 Quadrant Triage
+
+The final dashboard also provides a separate **Triage Q1-Q4** tab for a higher-level view of inbox priority. This tab is separate from the three required R6 panes; it does not replace or add to the R6 pane count.
+
+The triage uses an Eisenhower-style four-quadrant classification based on two independent properties: **urgency** and **importance**. The quadrant describes priority, while the normal InboxHero disposition (`reply`, `archive`, `defer`, `delegate`, `escalate`) describes how the message is handled. Therefore, a message can be in Q2 and still be archived, for example, when it is important context but requires no immediate action.
+
+| Quadrant | Meaning | Dashboard handling label | Final security-first run |
+|---|---|---|---:|
+| **Q1** | Urgent + Important | **For Your Action or Response** | 14 |
+| **Q2** | Important + Not Urgent | **Schedule / Follow Up** | 17 |
+| **Q3** | Urgent + Not Important | **Delegate** | 4 |
+| **Q4** | Not Urgent + Not Important | **Archive** | 57 |
+
+In the final security-first run, **92 safe messages** are classified into Q1-Q4. **13 generic-noise messages** are deterministically routed to Q4 / Archive, while the **8 security threats are excluded from normal triage** because they remain quarantined. The Triage tab shows quadrant counts, expandable quadrants, individual expandable messages, and each message's original disposition separately.
+
+This separation makes the dashboard useful for both prioritization and action review: the R6 Inbox Overview answers what requires attention, what is flagged, and what commitments exist, while the Triage tab provides the broader urgency/importance analysis.
 
 ## Custom capabilities
 
@@ -202,3 +252,52 @@ The owner remains accountable for an outgoing message that is explicitly approve
 ### 4. Name your own machinery.
 
 `agent.py` plays the reasoning/triage role, the capability functions in `demo.py` act like tasks, and `demo.py` provides the command router. `retrieval.py` provides the retrieval role, `preferences.py` provides persistent memory, and `gate.py` provides the human-in-the-loop safety boundary. A framework could have supplied standardized agent/task routing and state orchestration, but for this small local fixture explicit Python components make the safety boundaries and evidence easier to inspect and test.
+
+## Final security-first integration
+
+The final prototype keeps the original InboxHero R1-R6/X1-X4 implementation and adds a
+security-first processing boundary:
+
+```text
+INBOX
+  -> Rule Gate + Granite Guardian
+      -> THREAT -> QUARANTINE / FLAGGED
+      -> SAFE
+          -> Irreversible Guard
+          -> Owner Preference Security + Persistence
+          -> Generic Noise Filter
+          -> Q1-Q4 Quadrant Triage
+          -> Existing InboxHero Disposition / Agent
+```
+
+Security threats are excluded from preference extraction, normal triage and downstream
+agent processing. Irreversible or high-impact instructions are refused and routed for
+human review. The final dashboard has exactly three R6 Inbox Overview panes plus a
+separate Q1-Q4 Triage tab.
+
+### Final commands
+
+Run the security-first pipeline:
+
+```bash
+python3 pipeline.py
+```
+
+Generate the presentation-only dashboard from completed artifacts:
+
+```bash
+python3 dashboard_security_first.py
+```
+
+Run deterministic tests that do not require an LLM:
+
+```bash
+pytest -q tests/test_irreversible_actions.py tests/test_security_rule_gate.py
+```
+
+The security-first pipeline uses a deliberately separated model stack:
+**Granite Guardian 4.1 8B** (`granite4.1-guardian:8b`) performs the dedicated security-gate
+decision; **Gemma 4 12B** (`gemma4:12b`) performs specialized threat labeling and
+preference-security validation; and **Gemma 4 26B** (`gemma4:26b`) remains the general
+InboxHero model for contextual inbox work. The full security-first pipeline therefore
+requires Ollama with these local models available.

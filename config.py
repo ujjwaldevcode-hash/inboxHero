@@ -39,3 +39,7 @@ def validate_llm_config():
         raise RuntimeError(
             f"Unsupported LLM_PROVIDER={LLM_PROVIDER!r}; choose 'ollama' or 'gemini'."
         )
+
+# Security-first identity context
+OWNER_EMAIL = os.getenv("OWNER_EMAIL", "sam@paperjet.io")
+OWNER_DOMAIN = os.getenv("OWNER_DOMAIN", "paperjet.io")

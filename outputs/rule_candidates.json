@@ -1,0 +1,13 @@
+[
+  {
+    "candidate_id": "candidate_m008_credential_theft",
+    "message_id": "m008",
+    "threat_type": "CREDENTIAL_THEFT",
+    "risk": "HIGH",
+    "reason": "Message requests sensitive staging credentials without established authorization.",
+    "recommended_action": "DEVELOPER_SECURITY_REVIEW",
+    "status": "PENDING_REVIEW",
+    "production_rule_modified": false,
+    "created_at": "2026-09-21T19:05:50.283794+00:00"
+  }
+]
